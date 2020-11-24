@@ -18,6 +18,18 @@ int knapsack(int w, int n, int *wt, int *val){
             }
         }
     }
+
+
+    //Print the table
+    cout<<endl<<"Dynamic Programming Table:"<<endl<<endl;
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=w;j++)
+              cout<<p[i][j]<<"\t";
+        cout<<endl;
+    }
+
+
+
     return p[n][w];
 }
 
@@ -28,5 +40,6 @@ int main(){
 
     cout<<"Input a Knapsack Weight: ";cin>>w;
 
-    cout<<endl<<"Total value: "<<knapsack(w,n,wt,val)<<endl;
+    int total = knapsack(w,n,wt,val);
+    cout<<endl<<"Total value: "<<total<<endl;
 }
