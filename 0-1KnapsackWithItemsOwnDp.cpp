@@ -3,7 +3,6 @@ using namespace std;
 
 int knapsack(int w, int n, int *wt, int *val){
     int p[n+1][w+1];
-    int sack[n][w];
 
     for(int i=0;i<=n;i++)
         p[i][0] = 0;
@@ -11,20 +10,10 @@ int knapsack(int w, int n, int *wt, int *val){
         p[0][i] = 0;
     for(int i=1;i<=n;i++){
         for(int j=1;j<=w;j++){
-            if(j<wt[i-1]){
+            if(j<wt[i-1])
                 p[i][j] = p[i-1][j];
-                sack[i-1][j-1] = 0;
-            }
-            if(j>=wt[i-1]){
-                if(p[i-1][j]> val[i-1] + p[i-1][j-wt[i-1]]){
-                    p[i][j] = p[i-1][j];
-                    sack[i-1][j-1] = 0;
-                }
-                else{
-                    p[i][j] = val[i-1] + p[i-1][j-wt[i-1]];
-                    sack[i-1][j-1] = 1;
-                }
-            }
+            if(j>=wt[i-1])
+                p[i][j] = max(p[i-1][j], val[i-1]+p[i-1][j-wt[i-1]]);
         }
     }
 
